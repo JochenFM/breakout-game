@@ -1,13 +1,14 @@
 const grid = document.querySelector('.grid')
 const blockWidth = 100
 const blockHeight = 20 
+const boardWidth = 560
 
 const userStart = [230, 10]//default start position user, 230px, 10px
 let currentPosition = userStart
 
 //create Block
 
-class Block{ //to create the blocks in the grid by passing through 2 values
+class Block { //to create the blocks in the grid by passing through 2 values
     constructor(xAxis, yAxis) {
         this.bottomLeft = [xAxis, yAxis]//block as anchor point
         this.bottomRight = [xAxis + blockWidth, yAxis]
@@ -38,11 +39,11 @@ const blocks = [
 
 //draw all my blocks
 function addBlocks() {       
-for (let i = 0; i < blocks.length; i++){ //as long as i is smaller than the blocks array length, we increment i by 1
-const block = document.createElement('div')//create a div, store it as block
-block.classList.add('block')//give the block the class list as styled in CSS
-block.style.left = blocks[i].bottomLeft[0] + 'px'//style the first item in the blocks array, with the bottom left as anchor point i.e., 10px as result
-block.style.bottom = blocks[i].bottomLeft[1] +'px'//style the first item in the blocks array, with the bottom left as anchor point i.e., 270px as result
+for (let i = 0; i < blocks.length; i++) { //as long as i is smaller than the blocks array length, we increment i by 1//
+const block = document.createElement('div')//create a div, store it as block//
+block.classList.add('block')//give the block the class list as styled in CSS//
+block.style.left = blocks[i].bottomLeft[0] + 'px'//style the first item in the blocks array, with the bottom left as anchor point i.e., 10px as result//
+block.style.bottom = blocks[i].bottomLeft[1] +'px'//style the first item in the blocks array, with the bottom left as anchor point i.e., 270px as result//
 grid.appendChild(block) //put in the newly created block with the style of block
     }
 }
@@ -67,11 +68,24 @@ function drawUser() {
 
 function moveUser(e) {//function, pass through an event
     switch(e.key) {//
-        case 'Arrowleft':    //switch case listening out for keys, value assigned to that click is =>, then grab currentvalue andmove it -10
-        currentPosition[0] -= 10
-        drawUser() //redraw the user
-        break;    
+        case 'ArrowLeft':    //switch case listening out for keys, value assigned to that click is =>, then grab currentvalue andmove it -10
+            if (currentPosition[0] > 0) { //as lomg as user (left bottom point of rectangle is larger than zero, function is executed, otherwise stop
+            currentPosition[0] -= 10
+            drawUser() //redraw the user
+        
+            }
+            break;  
+        case 'ArrowRight':
+            if (currentPosition[0] < boardWidth - blockWidth) {
+            currentPosition[0] += 10     
+            drawUser()   
+            }
+            break;                    
     }
 }
 
 document.addEventListener('keydown', moveUser)
+
+//add ball
+
+const ball = document.createElement('div')
