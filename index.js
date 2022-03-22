@@ -7,7 +7,7 @@ const userStart = [230, 10]//default start position user, 230px, 10px
 let currentPosition = userStart
 
 const ballStart = [270, 40]
-let ballcurrentPosition = ballStart
+let ballCurrentPosition = ballStart
 
 //create Block
 
@@ -15,8 +15,9 @@ class Block { //to create the blocks in the grid by passing through 2 values
     constructor(xAxis, yAxis) {
         this.bottomLeft = [xAxis, yAxis]//block as anchor point
         this.bottomRight = [xAxis + blockWidth, yAxis]
-        this.topLeft = [xAxis, yAxis + blockHeight]
         this.topRight = [xAxis + blockWidth, yAxis + blockHeight]
+        this.topLeft = [xAxis, yAxis + blockHeight]
+       
     }
 }
 
@@ -57,8 +58,9 @@ addBlocks()
 
 const user = document.createElement('div')
 user.classList.add('user')
-drawUser()
 grid.appendChild(user)
+drawUser()
+
 
 //draw the user
 function drawUser() {
@@ -68,8 +70,8 @@ function drawUser() {
 
 //draw the ball
 function drawBall() {
-    ball.style.left = ballcurrentPosition[0] + 'px'
-    ball.style.bottom = ballcurrentPosition[1] + 'px'
+    ball.style.left = ballCurrentPosition[0] + 'px'
+    ball.style.bottom = ballCurrentPosition[1] + 'px'
 }
 
 // move user 
@@ -104,8 +106,8 @@ grid.appendChild(ball)//grab ball inside the HTML grid class
 // move ball
 
 function moveBall() {
-    ballcurrentPosition[0] +=2
-    ballcurrentPosition[1] +=2
+    ballCurrentPosition[0] +=2
+    ballCurrentPosition[1] +=2
     drawBall()
 
 }
