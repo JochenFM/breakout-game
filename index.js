@@ -1,10 +1,13 @@
 const grid = document.querySelector('.grid')
-const blockWidth = 100
-const blockHeight = 20 
-const boardWidth = 560
+const blockWidth = 100;
+const blockHeight = 20;
+const boardWidth = 560;
 
 const userStart = [230, 10]//default start position user, 230px, 10px
 let currentPosition = userStart
+
+const ballStart = [270, 40]
+let ballcurrentPosition = ballStart
 
 //create Block
 
@@ -63,6 +66,11 @@ function drawUser() {
     user.style.bottom = currentPosition[1] + 'px'
 }
 
+//draw the ball
+function drawBall() {
+    ball.style.left = ballcurrentPosition[0] + 'px'
+    ball.style.bottom = ballcurrentPosition[1] + 'px'
+}
 
 // move user 
 
@@ -83,9 +91,23 @@ function moveUser(e) {//function, pass through an event
             break;                    
     }
 }
-
 document.addEventListener('keydown', moveUser)
 
 //add ball
 
 const ball = document.createElement('div')
+ball.classList.add('ball')
+drawBall()
+grid.appendChild(ball)//grab ball inside the HTML grid class
+
+
+// move ball
+
+function moveBall() {
+    ballcurrentPosition[0] +=2
+    ballcurrentPosition[1] +=2
+    drawBall()
+
+}
+
+setInterval(moveBall, 30) //invoke the function every 30ms
